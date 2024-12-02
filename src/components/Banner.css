@@ -1,0 +1,48 @@
+.banner {
+    background-image: url('../assets/imagenes/discount_bkgr.jpg');
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+    margin-top: 60px; 
+    font-size: 18px;
+  }
+
+.texthead{
+    background-color: black;
+    border-radius: 7.5px;
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 10px;    
+}
+
+.textdesc{
+    background-color: black;
+    border-radius: 7.5px;
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 10px;    
+}
+  .banner h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  .banner p {
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .banner .btn {
+    background-color: white;
+    color: black;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 20px;
+  }
+  
+  .banner .btn:hover {
+    background-color: #f4f4f4;
+  }
