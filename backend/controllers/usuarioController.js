@@ -1,16 +1,13 @@
 const db = require('../database/db'); // Conexión a SQLite
 
-// Registro de usuarios
 exports.registro = (req, res) => {
   const { nombre, correo, password, rol } = req.body;
 
-  // Validar que los campos requeridos no estén vacíos
   if (!nombre || !correo || !password) {
     return res.status(400).json({ message: 'Todos los campos son requeridos' });
   }
 
   try {
-    // Consulta para insertar el usuario en la base de datos
     const query = `
       INSERT INTO usuario (nombre, correo, password, rol)
       VALUES (?, ?, ?, ?)
@@ -18,16 +15,13 @@ exports.registro = (req, res) => {
 
     db.run(query, [nombre, correo, password, rol || 'user'], function (err) {
       if (err) {
-        // Manejar errores de duplicidad (correo único)
         if (err.code === 'SQLITE_CONSTRAINT') {
           return res.status(400).json({ message: 'El correo ya está registrado' });
         }
-        // Otros errores
         console.error('Error al registrar usuario:', err.message);
         return res.status(500).json({ message: 'Error al registrar usuario' });
       }
 
-      // Respuesta exitosa
       res.status(201).json({ message: 'Usuario registrado exitosamente' });
     });
   } catch (error) {
@@ -36,17 +30,14 @@ exports.registro = (req, res) => {
   }
 };
 
-// Login de usuarios
 exports.login = (req, res) => {
   const { correo, password } = req.body;
 
-  // Validar que ambos campos estén presentes
   if (!correo || !password) {
     return res.status(400).json({ message: 'Correo y contraseña son requeridos' });
   }
 
   try {
-    // Consulta para buscar al usuario por correo y contraseña
     const query = `
       SELECT * FROM usuario WHERE correo = ? AND password = ?
     `;
@@ -58,11 +49,9 @@ exports.login = (req, res) => {
       }
 
       if (!row) {
-        // Si no se encuentra un usuario con las credenciales dadas
         return res.status(401).json({ message: 'Credenciales inválidas' });
       }
 
-      // Si las credenciales son correctas
       res.status(200).json({
         message: 'Inicio de sesión exitoso',
         user: {
